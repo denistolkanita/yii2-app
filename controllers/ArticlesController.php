@@ -13,16 +13,18 @@ class ArticlesController extends Controller
         $articles = Articles::find()->all();
 
         return $this->render('articles', [
-            'articles' => $articles
+            'articles' => $articles,
         ]);
     }
 
-    public function actioinArticle()
+    public function actionArticle()
     {
         $article = Articles::find()->where(['id' => Yii::$app->request->get()['id']])->one();
+        ++$article->hits;
+        $article->save();
 
-        return $this->render('$article', [
-            '$article' => $article
+        return $this->render('article', [
+            'article' => $article
         ]);
     }
 
