@@ -27,5 +27,4 @@ class ArticlesController extends Controller
             'article' => $article
         ]);
     }
-
 }
