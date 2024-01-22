@@ -1,10 +1,10 @@
 <?php
 
-use app\models\Articles;
+use app\models\Article;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
-$model = new Articles();
+$model = new Article();
 
 $form = ActiveForm::begin([
     'id' => 'create-article',

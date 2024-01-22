@@ -6,6 +6,11 @@ use yii\web\View;
 use yii\helpers\Url;
 ?>
 
+<div id="pages">
+    <a href="<?= Url::to(['article/create']) ?>">Create article</a>
+</div>
+<br>
+
 <div id="articles">
     <div class="jumbotron">
         <div class="row">

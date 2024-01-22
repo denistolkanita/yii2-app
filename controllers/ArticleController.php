@@ -27,8 +27,20 @@ class ArticleController extends Controller
 
         if (Yii::$app->request->isPost) {
             $article = new Article();
+            $postArticle = Yii::$app->request->post()['Article'];
+
+            foreach($postArticle as $field => $value) {
+                $article->$field = $value;
+            }
 
 
+
+//            $article->title = isset($postArticle['title']) ?? $postArticle['title'];
+//            $article->text = isset($postArticle['text']) ?? $postArticle['text'];
+//            $article->author_id = isset($postArticle['author_id']) ?? $postArticle['author_id'];
+//            $article->alias = isset($postArticle['alias']) ?? $postArticle['alias'];
+
+            $article->save();
         }
     }
 

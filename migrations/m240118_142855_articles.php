@@ -18,7 +18,7 @@ class m240118_142855_articles extends Migration
             'text' => $this->text(),
             'author_id' => $this->integer(),
             'alias' => $this->string(200),
-            'date' => $this->date("Y-m-d"),
+            'date' => $this->timestamp()->defaultExpression('NOW()'),
             'likes' => $this->integer()->defaultValue(0),
             'hits' => $this->integer()->defaultValue(0),
         ]);
