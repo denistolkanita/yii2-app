@@ -7,7 +7,7 @@ use yii\db\ActiveRecord;
 /**
  * Articles model
  */
-class Articles extends ActiveRecord
+class Article extends ActiveRecord
 {
     public function getFullTitle($title): string
     {

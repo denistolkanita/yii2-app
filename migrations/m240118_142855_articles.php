@@ -12,15 +12,15 @@ class m240118_142855_articles extends Migration
      */
     public function safeUp()
     {
-        $this->createTable('articles', [
+        $this->createTable('article', [
             'id' => $this->primaryKey(),
             'title' => $this->string(200),
-            'text' => $this->string(),
+            'text' => $this->text(),
             'author_id' => $this->integer(),
             'alias' => $this->string(200),
             'date' => $this->date("Y-m-d"),
-            'likes' => $this->integer(),
-            'hits' => $this->integer(),
+            'likes' => $this->integer()->defaultValue(0),
+            'hits' => $this->integer()->defaultValue(0),
         ]);
     }
 
@@ -29,6 +29,6 @@ class m240118_142855_articles extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%articles}}');
+        $this->dropTable('{{%article}}');
     }
 }

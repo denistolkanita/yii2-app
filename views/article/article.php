@@ -7,7 +7,7 @@ use yii\helpers\Url;
 ?>
 
 <div>
-    <a href="<?= Url::to(['articles/articles'])?>">Back</a>
+    <a href="<?= Url::to(['article/articles'])?>">Back</a>
     <h2><?= $article->getFullTitle($article->title) ?></h2>
     <p><?= $article->text ?></p>
     <p><?= $article->date ?></p>
