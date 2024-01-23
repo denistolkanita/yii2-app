@@ -3,19 +3,44 @@
 namespace app\controllers;
 
 use app\models\Article;
+use yii\base\InvalidConfigException;
+use yii\base\InvalidRouteException;
 use yii\web\Controller;
 use Yii;
+use yii\web\UploadedFile;
 
 class ArticleController extends Controller
 {
+    /*
+     * path_example: web/img/article-id/image-name.jpg
+     */
+    private const IMAGE_FOLDER = 'img';
+    /**
+     * @throws InvalidRouteException
+     * @throws InvalidConfigException
+     */
     public function actionEdit()
     {
         if (Yii::$app->request->isGet) {
-            return $this->render('edit');
+            $article = Article::find()->where(['id' => Yii::$app->request->get()['id']])->one();
+
+            return $this->render('edit', [
+                'article' => $article
+            ]);
         }
 
         if (Yii::$app->request->isPost) {
-            var_dump(Yii::$app->request);
+            $postArticle = Yii::$app->request->post()['Article'];
+            $articleId = Yii::$app->request->get()['id'];
+            $article = Article::find()->where(['id' => $articleId])->one();
+
+            foreach($postArticle as $field => $value) {
+                $article->$field = $value;
+            }
+
+            $article->save();
+
+            Yii::$app->getResponse()->redirect(Yii::$app->getRequest()->getUrl());
         }
     }
 
@@ -32,15 +57,18 @@ class ArticleController extends Controller
             foreach($postArticle as $field => $value) {
                 $article->$field = $value;
             }
-
-
-
-//            $article->title = isset($postArticle['title']) ?? $postArticle['title'];
-//            $article->text = isset($postArticle['text']) ?? $postArticle['text'];
-//            $article->author_id = isset($postArticle['author_id']) ?? $postArticle['author_id'];
-//            $article->alias = isset($postArticle['alias']) ?? $postArticle['alias'];
-
             $article->save();
+
+            if ($_FILES['Article']['name']['image']) {
+                $image = UploadedFile::getInstance($article, 'image');
+
+                if ($image) {
+                    $article->image = $article->getPrimaryKey() . '.' . str_replace('image/', '', $image->type);
+                    $image->saveAs(self::IMAGE_FOLDER . '/' . $article->image);
+                    $article->save();
+                }
+            }
+
         }
     }
 
