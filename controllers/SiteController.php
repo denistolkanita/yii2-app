@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Article;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -125,4 +126,24 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+    /**
+     * Method with some examples with ActiveRecord usage
+     */
+    public function actionActiveRecord()
+    {
+//        $article = Article::find()->select(['id', 'title', 'alias'])->all();
+//        $article = Article::findOne(1); // [ $id = 1 ]
+//        $article = Article::find()->where(['alias' => 'title-3'])->all();
+//        $article = Article::find()->where(['alias' => 'title-4'])->orWhere(['id' => '27'])->all();
+//        $article = Article::find()->where(['alias' => 'title-1'])->andWhere(['id' => '1'])->all();
+//        $article = Article::find()->orderBy('author_id')->all();
+//        $article = Article::find()->one();
+        $articles = Article::findBySql("SELECT * FROM `article`")->all();
+
+        // pretty print in Yii2
+        highlight_string("<?php\n\$articles =\n" . var_export($articles, true) . ";\n?>");
+        die();
+    }
+
 }

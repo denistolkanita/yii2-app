@@ -12,7 +12,7 @@ use yii\web\UploadedFile;
 class ArticleController extends Controller
 {
     /*
-     * path_example: web/img/article-id/image-name.jpg
+     * path_example: web/img/article-id.image-extention
      */
     private const IMAGE_FOLDER = 'img';
     /**
