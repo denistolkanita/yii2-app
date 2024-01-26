@@ -20,7 +20,7 @@ class m240126_143638_seed_tags extends Migration
 
         foreach ($this->tags as $tag) {
             $newTag = new Tags();
-            $newTag->tag = $this->tags[array_rand($this->tags)];
+            $newTag->tag = $tag;
             $newTag->user_id = $userIds[array_rand($userIds)];
 
             $newTag->save();

@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\Article;
 use Yii;
+use yii\db\Query;
 use yii\filters\AccessControl;
 use yii\web\Controller;
 use yii\web\Response;
@@ -139,10 +140,17 @@ class SiteController extends Controller
 //        $article = Article::find()->where(['alias' => 'title-1'])->andWhere(['id' => '1'])->all();
 //        $article = Article::find()->orderBy('author_id')->all();
 //        $article = Article::find()->one();
-        $articles = Article::findBySql("SELECT * FROM `article`")->all();
+//        $articles = Article::findBySql("SELECT * FROM `article`")->all();
+
+        $query = new Query;
+        $query->select('tags.id, tags.tag, user.id as user_id, user.name, user.age')
+            ->from('tags')
+            ->leftJoin('user', 'tags.user_id = user.id');
+
+        $command = $query->createCommand()->queryAll();
 
         // pretty print in Yii2
-        highlight_string("<?php\n\$articles =\n" . var_export($articles, true) . ";\n?>");
+        highlight_string("<?php\n\$articles =\n" . var_export($command, true) . ";\n?>");
         die();
     }
 
