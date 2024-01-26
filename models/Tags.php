@@ -7,5 +7,5 @@ use yii\db\ActiveRecord;
 /**
  * User model
  */
-class User extends ActiveRecord
+class Tags extends ActiveRecord
 {}
