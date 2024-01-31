@@ -8,6 +8,7 @@ use yii\base\InvalidRouteException;
 use yii\web\Controller;
 use Yii;
 use yii\web\UploadedFile;
+use yii\data\Pagination;
 
 class ArticleController extends Controller
 {
@@ -74,10 +75,18 @@ class ArticleController extends Controller
 
     public function actionArticles()
     {
-        $articles = Article::find()->all();
+        $articles = Article::find();
+
+        $pagination = new Pagination([
+            'defaultPageSize' => 10,
+            'totalCount' => $articles->count()
+        ]);
+
+        $articles = $articles->offset($pagination->offset)->limit($pagination->limit)->all();
 
         return $this->render('articles', [
             'articles' => $articles,
+            'pagination' => $pagination,
         ]);
     }
 

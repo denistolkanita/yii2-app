@@ -1,9 +1,11 @@
 <?php
 /* @var $this View */
 /* @var $articles */
+/* @var $pagination */
 
 use yii\web\View;
 use yii\helpers\Url;
+use yii\widgets\LinkPager;
 ?>
 
 <div id="pages">
@@ -20,4 +22,10 @@ use yii\helpers\Url;
             <?php endforeach; ?>
         </div>
     </div>
+</div>
+<div class="pagination">
+    <?php try {
+        echo LinkPager::widget(['pagination' => $pagination]);
+    } catch (Throwable $e) {
+    } ?>
 </div>
