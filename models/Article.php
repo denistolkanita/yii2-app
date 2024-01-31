@@ -26,6 +26,7 @@ class Article extends ActiveRecord
 
     public function getShortText(string $text): string
     {
+        $result = $text;
         $needToCut = strlen($text) > 30;
 
         if ($needToCut) {
@@ -33,8 +34,10 @@ class Article extends ActiveRecord
             while (substr($text, -1) !== ' ') {
                 $text = substr($text, 0, -1);
             }
+
+            $result = substr($text, 0, -1) . ($needToCut ? '...' : '');
         }
 
-        return substr($text, 0, -1) . ($needToCut ? '...' : '');
+        return $result;
     }
 }
