@@ -154,4 +154,15 @@ class SiteController extends Controller
         die();
     }
 
+    public function actionPjax()
+    {
+        return $this->render('pjax');
+    }
+
+    public function actionPjaxStep()
+    {
+        // here you can return template
+        return '<h1>Reloaded with Pjax!</h1>';
+    }
+
 }
