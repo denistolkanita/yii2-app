@@ -6,6 +6,7 @@
 use yii\web\View;
 use yii\helpers\Url;
 use yii\widgets\LinkPager;
+use yii\helpers\Html;
 ?>
 
 <div id="pages">
@@ -18,7 +19,8 @@ use yii\widgets\LinkPager;
         <div class="row">
             <?php foreach($articles as $article): ?>
                 <a href="<?= Url::to(['article/article', 'id' => $article->id])?>"><?= $article->getFullTitle($article->title) ?></a>
-                <p><?= $article->getShortText($article->text) ?></p>
+            <!-- Line below have the same output as `<p><?= $article->getShortText($article->text) ?></p>`-->
+                <?= Html::tag('p', $article->getShortText($article->text)) ?>
             <?php endforeach; ?>
         </div>
     </div>
