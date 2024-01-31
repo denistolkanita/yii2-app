@@ -19,6 +19,7 @@ class m240124_084314_seed_articles extends Migration
             $article = new Article();
             $article->title = 'title-' . $index;
             $article->author_id = $index;
+            $article->text = 'text- ' . $index;
             $article->alias = 'title-' . $index;
 
             $article->save();

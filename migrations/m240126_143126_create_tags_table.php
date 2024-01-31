@@ -33,10 +33,10 @@ class m240126_143126_create_tags_table extends Migration
      */
     public function safeDown()
     {
-        $this->dropTable('{{%tags}}');
         $this->dropForeignKey(
             'user_id',
             'tags'
         );
+        $this->dropTable('{{%tags}}');
     }
 }
