@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Article;
+use app\models\Person;
 use Yii;
 use yii\db\Query;
 use yii\filters\AccessControl;
@@ -165,4 +166,16 @@ class SiteController extends Controller
         return '<h1>Reloaded with Pjax!</h1>';
     }
 
+    public function actionAddPerson()
+    {
+        if (Yii::$app->request->isGet) {
+            return $this->render('add-person');
+        }
+
+        if (Yii::$app->request->isPost) {
+            $model = new Person();
+            $model->load(Yii::$app->request->post());
+            $model->save();
+        }
+    }
 }

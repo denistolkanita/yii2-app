@@ -9,8 +9,8 @@ use yii\db\Migration;
  */
 class m240126_143638_seed_tags extends Migration
 {
-
     public array $tags = ['cats', 'dogs', 'birds', 'cars', 'colors'];
+
     /**
      * {@inheritdoc}
      */
@@ -34,19 +34,4 @@ class m240126_143638_seed_tags extends Migration
     {
         Tags::deleteAll(['tag' => $this->tags]);
     }
-
-    /*
-    // Use up()/down() to run migration code without a transaction.
-    public function up()
-    {
-
-    }
-
-    public function down()
-    {
-        echo "m240126_143638_seed_tags cannot be reverted.\n";
-
-        return false;
-    }
-    */
 }
