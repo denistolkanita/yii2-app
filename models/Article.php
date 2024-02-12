@@ -35,7 +35,7 @@ class Article extends ActiveRecord
                 $text = substr($text, 0, -1);
             }
 
-            $result = substr($text, 0, -1) . ($needToCut ? '...' : '');
+            $result = substr($text, 0, -1) . '...';
         }
 
         return $result;
